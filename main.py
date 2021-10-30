@@ -28,11 +28,12 @@ sock.setblocking(False)
 sock.bind(locaddr)
 M_SIZE = 20000
 data1 = [0] * 100
+data2 = [0] * 100
 
 
 def update():
     try:
-        global curve_flux, curve_dose, data1
+        global curve_flux, curve_dose, data1, data2
         message, cli_addr = sock.recvfrom(M_SIZE)
         data = json.loads(message)
         # データ更新
@@ -41,8 +42,10 @@ def update():
 
         data1[:-1] = data1[1:]
         data1[-1] = data["dose"]
-        curve_dose.setData(data1)
-        curve_dose.setPos(data["time"], 0)
+        data2[:-1] = data2[1:]
+        data2[:-1] = data["time"]
+        curve_dose.setData(data2, data1)
+        # curve_dose.setPos(data["time"], 0)
     except:
         pass
 
