@@ -43,7 +43,7 @@ def update():
         data1[:-1] = data1[1:]
         data1[-1] = data["dose"]
         data2[:-1] = data2[1:]
-        data2[:-1] = data["time"]
+        data2[-1] = data["time"]
         curve_dose.setData(data2, data1)
         # curve_dose.setPos(data["time"], 0)
     except:
